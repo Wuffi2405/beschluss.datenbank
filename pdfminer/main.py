@@ -34,33 +34,41 @@ for page_layout in pages:
                 else:
                     print("PLEASE HANDLE UNKNOWN ELEMENT: ", line_element)
                     exit()
-            data.append((layout_element.get_text(), textboxFont, textboxSize))
+            data.append((layout_element.get_text().strip(), textboxFont, textboxSize))
 
-filtered = []
+rml = []
+for i, d in enumerate(data):
+    if d[0].isdigit():
+        rml.append(i)
+
+for i in reversed(rml):
+    data.pop(i)
 
 
-for x in data:
-    if len(x[0]) > 5:
-        filtered.append(x)
 
-antragsElement = ["", "", ""]
+data.sort(key=lambda x: x[2])
 
-anträge = []
+for d in reversed(data):
+    if len(d[0]) < 3:
+        print("ID: " + d[0])
+        break
 
-for x in range(len(filtered)):
-    object = filtered[x]
-    if object[0].startswith("Titel"):
-        if antragsElement != ["","",""]:
-            anträge.append(antragsElement)
-            antragsElement = ["","",""]
-        antragsElement[0] = filtered[x+1][0]
-        print(antragsElement)
-        continue
-    if object[0].startswith("AntragstellerInnen"):
-        antragsElement[1] = filtered[x+1][0]
-        continue
+for d in reversed(data):
+    if len(d[0]) > 8:
+        print("Title: " + d[0])
+        break
 
-    if abs(object[2] - 8.96) < 0.1:
-        antragsElement[2] += object[0]
+sorted_fontsize = {}
+for d in data:
+    if round(d[2], 1) not in sorted_fontsize:
+        sorted_fontsize[round(d[2], 1)] = d[0]
+    else:
+        sorted_fontsize[round(d[2], 1)] += d[0]
 
-print(anträge)
+most_common_fontsize = None
+most_common_fontsize_count = 0
+for k, v in sorted_fontsize.items():
+    if len(v) > most_common_fontsize_count:
+        most_common_fontsize_count = len(v)
+        most_common_fontsize = k
+print("Content: ", sorted_fontsize[most_common_fontsize])

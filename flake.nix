@@ -19,6 +19,7 @@
           django
           djangorestframework
           pypdf
+	  pdfminer-six
         ]);
       in
       {
