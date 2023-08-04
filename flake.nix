@@ -16,6 +16,8 @@
           };
         };
         pythonEnv = py.withPackages (ps: with ps; [
+          django
+          djangorestframework
           pypdf
         ]);
       in
