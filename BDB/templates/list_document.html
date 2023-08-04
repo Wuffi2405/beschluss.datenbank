@@ -1,0 +1,11 @@
+{% load static %}
+
+{% block content %}
+{% for document in documents %}
+<a href="{% url 'cview_document' %}{{ document }}">
+<h1>{{ document }}</h1>
+<p>data/{{ document }}.json</p>
+</br>
+</a>
+{% endfor %}
+{% endblock %}
