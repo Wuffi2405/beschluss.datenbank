@@ -8,6 +8,7 @@ def index(request):
     return HttpResponse("Hallo Welt")
 
 def view_document(request, document_id=None):
+    print("hi")
     if document_id is None:
         return redirect('list_document')
     # check if file exists
@@ -34,6 +35,7 @@ def list_document(request):
 def load_document(document_name):
     document = None
     try:
+        print(f'./data/{document_name}.json')
         document = json.load(open(f'./data/{document_name}.json'))
     except:
         print("FATAL ERROR: Datei konnte nicht geladen werden")
