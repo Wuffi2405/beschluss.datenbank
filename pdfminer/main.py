@@ -11,8 +11,9 @@ from pdfminer.layout import LTTextBox, LTTextLine, LTChar, LTAnno, LAParams
 from pdfminer.pdfpage import PDFPage
 from io import BytesIO
 
-data = []
+import json
 
+data = []
 pages = extract_pages("sample.pdf")
 
 for page_layout in pages:
@@ -81,7 +82,5 @@ if beschluss_element != ["",""]:
     beschlüsse.append(beschluss_element)
 
 for id,e in enumerate(beschlüsse):
-    with open("../data/\""+ e[0] + ".txt\"", "w") as file:
-        file.write("{title:" + e[0]+",")
-        file.write("text: " + e[1] + "}")
-        
+    with open("../data/\""+ e[0] + ".json\"", "w") as file:
+        file.write(json.dumps({"title": e[0], "text_html": e[1]}, ensure_ascii=False))
