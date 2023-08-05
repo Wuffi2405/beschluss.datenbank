@@ -1,11 +1,54 @@
 {% load static %}
-
-{% block content %}
-{% for document in documents %}
-<a href="{% url 'cview_document' %}{{ document }}">
-<h1>{{ document }}</h1>
-<p>data/{{ document }}.json</p>
-</br>
-</a>
-{% endfor %}
-{% endblock %}
+<html>
+    <head>
+        <title>Beschluss-Datenbank</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{% static 'style.scss' %}">
+        <link rel="stylesheet" href="{% static 'style.css' %}">
+        {% load django_bootstrap5 %}
+        {% bootstrap_css %}
+        {% bootstrap_javascript %}
+    </head>
+    <body>
+        <div class="container">
+            <header class="d-flex flex-wrap justify-content-center py-3 border-bottom">
+            <a class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none text-dark">
+                <img class="bi me-2" src="{% static 'logo.svg' %}" width="40" height="40"></img>
+                <span class="fs-4">
+                    Beschlussdatenbank
+                </span>
+            </a>
+            <ul class="nav nav-pills">
+                <li class="nav-item">
+                    <a class="nav-link active" href="http://cloud.rote.tools">PORSCHE PANAMERA - KOMM NOCH HEUTE IN DIE GRUPPE</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Klick Me</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="http://rotes.team">Rotes Team</a>
+                </li>
+            </ul>
+            </header>
+        </div>
+        <main class="container mt-5">
+            {% for document in documents %}
+            <div class="card mt-2">
+                <div class="card-header">
+                    {{ document.title }}
+                </div>
+                <div class="card-body">
+                    {{ document.sections.0.html }}
+                    <br>
+                    <button type="button" class="btn btn-primary" href="{% url 'cview_document' %}{{ document.title }}">
+                        Antrag lesen
+                    </button>
+                </div>
+                <div class="card-footer">
+                    {{ document.initiators.0.organization }}
+                </div>
+            </div>
+            {% endfor %}
+        </main>
+    </body>
+</html>

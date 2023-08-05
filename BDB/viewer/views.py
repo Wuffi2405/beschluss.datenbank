@@ -1,7 +1,11 @@
 from django.shortcuts import render, redirect
+from django.http import HttpResponse
 import json
 import os
 import glob
+
+def index(request):
+    return HttpResponse("Hallo Welt")
 
 def view_document(request, document_id=None):
     if document_id is None:
@@ -19,5 +23,18 @@ def view_document(request, document_id=None):
 
 def list_document(request):
     # get all files from ./data
-    documents = [ f.split('/')[-1].split('.')[0] for f in glob.glob('./data/*.json')]
+    document_titles = [ f.split('/')[-1].split('.')[0] for f in glob.glob('./data/*.json')]
+    
+    documents = []
+    for d in document_titles:
+        documents.append(load_document(d))
+    
     return render(request, 'list_document.html', {'documents': documents})
+
+def load_document(document_name):
+    document = None
+    try:
+        document = json.load(open(f'./data/{document_name}.json'))
+    except:
+        print("FATAL ERROR: Datei konnte nicht geladen werden")
+    return document

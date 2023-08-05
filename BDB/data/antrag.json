@@ -1,0 +1,39 @@
+{
+  "type": "motion",
+  "id": 176,
+  "agenda_item": "Antragsberatung der \u00fcbrigen LaKo Antr\u00e4ge ",
+  "prefix": "B6NEU",
+  "title": "B6 Einf\u00fchrung eines Modellprojekts Demokratiebildung an Schule",
+  "title_with_intro": "B6 Einf\u00fchrung eines Modellprojekts Demokratiebildung an Schule",
+  "title_with_prefix": "B6NEU: B6 Einf\u00fchrung eines Modellprojekts Demokratiebildung an Schule",
+  "status_id": 26,
+  "status_title": "Beschluss",
+  "date_published": null,
+  "supporters": [],
+  "initiators": [
+    {
+      "type": "organization",
+      "name": null,
+      "organization": "Landesausschuss Jusos Th\u00fcringen"
+    }
+  ],
+  "initiators_html": "Landesausschuss Jusos Th\u00fcringen",
+  "sections": [
+    {
+      "type": "TextSimple",
+      "title": "Antragstext",
+      "html": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
+      "layout_right": false
+    },
+    {
+      "type": "TextSimple",
+      "title": "Begr\u00fcndung",
+      "html": "<div class=\"text motionTextFormattings textOrig\"><p>Angesichts von dramatischen Lehrkr\u00e4ftemangel, unz\u00e4hliger Vertretungsstunden durch fachfremde Lehrkr\u00e4fte sowie den kaum auf f\u00f6derales, regionales und lokales politisches Geschehen ausgerichteten Sozialkundeunterricht, steht es schlecht um den Politikunterricht an Th\u00fcringer Schulen.</p>\n<p>Die Zauberformel der Aktivierung b\u00fcrgerschaftlicher Selbsterm\u00e4chtigung durch politisches Engagement und Ehrenamt bleibt eine Leerformel, wenn trotz der Bedrohungen durch Rechtspopulismus und Rechtsextremismus alles so bleibt, wie es ist. Wir wollen eine moderne und zeitgem\u00e4\u00dfe Form der politischen Bildung an Schule finden, die Handlungsfelder f\u00fcr junge Menschen schafft, welche gesellschaftliche Missst\u00e4nde nicht nur erkennen, benennen und einordnen, sondern diesen auch aktiv und planvoll begegnen wollen.</p>\n<p>Mit den durch eine landesweite \u201eKoordinierungsstelle f\u00fcr Demokratiebildung an Schule\u201c begleiteten Modellschulen verbindet sich die Hoffnung, Schulsettings im Sinne lebendiger Schuldemokratie und der Erfahrbarmachung demokratischer Werte neu zu erfinden. Das ist vor allem aus jungsozialistischer Perspektive dringend n\u00f6tig, um durch bessere politische Bildung in Th\u00fcringen, Sch\u00fcler*innen Wege aufzuzeigen das Gemeinwesen mitzugestalten und zu verhindern, dass die Marginalisierung von gesellschaftlichen Gruppen weiter salonf\u00e4hig wird.</p></div>",
+      "layout_right": false
+    }
+  ],
+  "proposed_procedure": null,
+  "amendment_links": [],
+  "url_json": "https://antrag.jusos.rocks/rest/la20/motion/Einfuehrung_eines_Modellprojekts_Demokratiebildung_an_Schule-59884",
+  "url_html": "https://antrag.jusos.rocks/la20/Einfuehrung_eines_Modellprojekts_Demokratiebildung_an_Schule-59884"
+}

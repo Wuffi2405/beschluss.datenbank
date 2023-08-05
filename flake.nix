@@ -20,6 +20,7 @@
           djangorestframework
           pypdf
 	  pdfminer-six
+	  django-bootstrap5
         ]);
       in
       {

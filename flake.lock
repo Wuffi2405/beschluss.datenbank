@@ -2,11 +2,11 @@
   "nodes": {
     "nixpkgs": {
       "locked": {
-        "lastModified": 1690303979,
-        "narHash": "sha256-fCfHKVlJP4Fw2/DFOslGJfaRS2ICl8TFiqx2UQfoHYI=",
+        "lastModified": 1691250021,
+        "narHash": "sha256-pqn1iW+MxYm/Fyd/yH3uaRm6Cp5VHK0hKqDt3aWKPYQ=",
         "owner": "DerDennisOP",
         "repo": "nixpkgs",
-        "rev": "3f34d72f14b949332e7bc5f1bfdb422351a487e3",
+        "rev": "b1ae9179f4b6d17cf7a05431a3ef8c6407c6c8b5",
         "type": "github"
       },
       "original": {
