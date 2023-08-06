@@ -40,16 +40,19 @@ def document_overview(request):
     
     return render(request, 'list_document.html', {'documents': documents})
 
-status = None
+status = {
+    'json_normalisieren': None
+    }
 #
 #   Admin Menü, um verschiedene Operationen auf den JSON-Dateien auszuführen
 #
 def admin_menu(request):
     global status
+
     if request.method == "POST":
 
         if request.POST['option'] == "jSoNnOrMaLiSiErEn":
-            status = "fsdfdsfsfsfdsfsfd"
+            status['json_normalisieren'] = "Button erfolgreich gedrückt"
             func.normalize_json()
 
         return HttpResponseRedirect(reverse('admin_menu'))

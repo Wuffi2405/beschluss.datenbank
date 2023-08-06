@@ -52,16 +52,11 @@
                             </form>
                         </div>
                         <div class="card-footer">
-                            {% if status %}
+                            {% if status.json_normalisieren is not None %}
                             <p class="m-0 text-success">
-                            {% endif %}
-                            {% if not status %}
-                            <p class="m-0">
-                            {% endif %}
-        
-                                Ich mag Züge
-                                {{status}}
+                                {{status.json_normalisieren}}
                             </p>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
