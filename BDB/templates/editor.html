@@ -1,54 +1,100 @@
-{% load static %}
+<!DOCTYPE html>
 <html>
-    <head>
-        <title>Beschluss-Datenbank</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="{% static 'style.scss' %}">
-        <link rel="stylesheet" href="{% static 'style.css' %}">
-        {% load django_bootstrap5 %}
-        {% bootstrap_css %}
-        {% bootstrap_javascript %}
-    </head>
-    <body>
-        <div class="container">
-            <header class="d-flex flex-wrap justify-content-center py-3 border-bottom">
-            <a class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none text-dark">
-                <img class="bi me-2" src="{% static 'logo.svg' %}" width="40" height="40"></img>
-                <span class="fs-4">
-                    Beschlussdatenbank
-                </span>
-            </a>
-            <ul class="nav nav-pills">
-                <li class="nav-item">
-                    <a class="nav-link active" href="http://cloud.rote.tools">Mensch</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Klick Me</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="http://rotes.team">Rotes Team</a>
-                </li>
-            </ul>
-            </header>
-        </div>
-        <main class="container mt-5">
-            {% for document in documents %}
-            <div class="card mt-2">
-                <div class="card-header">
-                    {{ document.title }}
-                </div>
-                <div class="card-body">
-                    {{ document.sections.0.html }}
-                    <br>
-                    <button type="button" class="btn btn-primary" href="{% url 'cview_document' %}{{ document.title }}">
-                        Antrag lesen
-                    </button>
-                </div>
-                <div class="card-footer">
-                    {{ document.initiators.0.organization }}
-                </div>
-            </div>
-            {% endfor %}
-        </main>
-    </body>
+
+<head>
+    <title>PDF Viewer with Extracted Text</title>
+    <style>
+        /* Style for the main container */
+        .container {
+            display: flex;
+        }
+
+        /* Style for the PDF viewer container */
+        #pdfViewerContainer {
+            flex: 1;
+            overflow: auto;
+            padding: 10px;
+        }
+
+        /* Style for the extracted text container */
+        #extractedTextContainer {
+            flex: 1;
+            overflow: auto;
+            padding: 10px;
+            border-left: 1px solid #ccc;
+            font-size: x-small;
+            /* Add a border to separate the panes */
+            word-wrap: break-word;
+            /* Allow long words to wrap */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div id="pdfViewerContainer"></div>
+        <div id="extractedTextContainer"></div>
+    </div>
+
+    <input type="file" id="fileInput">
+    <button onclick="uploadFile()">Upload PDF File</button>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.min.js"></script>
+    <script>
+        async function uploadFile() {
+            const fileInput = document.getElementById('fileInput');
+            const pdfViewerContainer = document.getElementById('pdfViewerContainer');
+            const extractedTextContainer = document.getElementById('extractedTextContainer');
+            const file = fileInput.files[0];
+
+            if (file && file.type === 'application/pdf') {
+                const formData = new FormData();
+                formData.append('file', file);
+
+                const response = await fetch('/editor/', {  // Update the URL to match your Django route
+                    method: 'POST',
+                    body: formData,
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+
+                    // Clear previous content
+                    pdfViewerContainer.innerHTML = '';
+
+                    // Display PDF using PDF.js
+                    const pdfData = await file.arrayBuffer();
+                    const pdf = await pdfjsLib.getDocument({ data: pdfData }).promise;
+
+                    for (let pageNumber = 1; pageNumber <= pdf.numPages; pageNumber++) {
+                        const page = await pdf.getPage(pageNumber);
+                        const canvas = document.createElement('canvas');
+                        const context = canvas.getContext('2d');
+                        const viewport = page.getViewport({ scale: 1 });
+
+                        canvas.width = viewport.width;
+                        canvas.height = viewport.height;
+
+                        const renderContext = {
+                            canvasContext: context,
+                            viewport: viewport,
+                        };
+
+                        await page.render(renderContext).promise;
+
+                        pdfViewerContainer.appendChild(canvas);
+                    }
+
+                    // Display extracted text
+                    const textElement = document.createElement('pre');
+                    textElement.textContent = data.text;
+                    extractedTextContainer.innerHTML = data.text;
+                } else {
+                    console.error('Error extracting text from PDF');
+                }
+            }
+        }
+    </script>
+</body>
+
 </html>
