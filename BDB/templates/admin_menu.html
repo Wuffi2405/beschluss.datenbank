@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="{% static 'style.scss' %}">
         <link rel="stylesheet" href="{% static 'style.css' %}">
+        <link rel="icon" type="image/svg" href="{% static 'logo.svg' %}">
         {% load django_bootstrap5 %}
         {% bootstrap_css %}
         {% bootstrap_javascript %}
@@ -32,23 +33,57 @@
             </header>
         </div>
         <main class="container mt-5" style="min-height: 70vh;">
-            {% for document in documents %}
-            <div class="card mt-2">
-                <div class="card-header">
-                    {{ document.title }}
+            <div class="row">
+                <div class="col">
+                    <div class="card mt-2">
+                        <div class="card-header">
+                            Beschlüsse normalisieren
+                        </div>
+                        <div class="card-body">
+                            Iteriert über alle vorhandenen Beschlüsse und normalisiert sie. Das bedeutet:
+                            <ul>
+                                <li>nicht benötigte JSON-TAGS entfernen</li>
+                                <li>eindeutige Identifier hinzufügen</li>
+                            </ul>
+                            <form action="{% url 'admin_menu' %}" method="POST" class="m-0">
+                                {% csrf_token %}
+                                <input type="submit" class="btn btn-primary" href="{% url 'admin_menu' %}" value="JSON normalisieren"/>
+                                <input type="hidden" class="btn btn-primary" href="{% url 'admin_menu' %}" name="option" value="jSoNnOrMaLiSiErEn"/>
+                            </form>
+                        </div>
+                        <div class="card-footer">
+                            {% if status %}
+                            <p class="m-0 text-success">
+                            {% endif %}
+                            {% if not status %}
+                            <p class="m-0">
+                            {% endif %}
+        
+                                Ich mag Züge
+                                {{status}}
+                            </p>
+                        </div>
+                    </div>
                 </div>
-                <div class="card-body">
-                    {{ document.sections.0.html }}
-                    <br>
-                    <a type="button" class="btn btn-primary" href="{% url 'cview_document' %}{{ document.title }}">
-                        Antrag lesen
-                    </a>
+                <div class="col">
+                    <div class="card mt-2">
+                        <div class="card-header">
+                            Bäume sind Freunde und kein Futter
+                        </div>
+                        <div class="card-body"></div>
+                        <div class="card-footer"></div>
+                    </div>
                 </div>
-                <div class="card-footer">
-                    {{ document.initiators.0.organization }}
+                <div class="col">
+                    <div class="card mt-2">
+                        <div class="card-header">
+                            Whoopie di scoop
+                        </div>
+                        <div class="card-body"></div>
+                        <div class="card-footer"></div>
+                    </div>
                 </div>
             </div>
-            {% endfor %}
         </main>
         <div class="container">
             <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
