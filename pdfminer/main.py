@@ -110,16 +110,12 @@ def extract_file(indir, outdir):
 
 
 def extract_recursive(indir, outdir):
-    for x in listdir(indir):
-        if isdir(indir + "/" + x):
-            extract_recursive(indir + "/" + x, outdir + "/" + x)
-        if isfile(indir + "/" + x):
-            if x.endswith(".pdf"):
-                foldername = x[:-4]
-                print("Found pdf:", indir + "/" + x)
-                print("Extracting to ", outdir + "/" + foldername)
-                extract_file(indir + "/" + x, outdir + "/" + foldername)
-
+    allpdfs = glob("../raw_data/**/*.pdf"):
+    for pdf in allpdfs:
+        foldername = pdf[:-4]
+        print("Found pdf:", indir + "/" + pdf)
+        print("Extracting to ", outdir + "/" + foldername)
+        extract_file(indir + "/" + pdf, outdir + "/" + foldername)
 
 raw_data_dir = "../raw_data"
 data_dir = "../data"
